@@ -7,6 +7,8 @@
 using namespace std;
 
 // Function prototypes
+
+
 void displayMenu();
 void handleUserInput(Storage& storage, Other& other);
 
