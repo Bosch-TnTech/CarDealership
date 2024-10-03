@@ -7,6 +7,12 @@ class Storage {
 private:
     Car** cars;      // Pointer to an array of Car objects
     int carCount;    // Number of cars
+    ifstream myfile;
+    int numCars;
+    string cmake;
+    string cmodel;
+    int cyear;
+    float cprice;
 
 public:
     Storage();       // Constructor
