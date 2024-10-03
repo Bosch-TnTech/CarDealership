@@ -19,6 +19,13 @@ public:
 
     // Getters and Setters
     string getMake();
+
+    string getModel();
+
+    int getYear();
+
+    double getPrice();
+
     void setMake(const string& make);
     
     void printDetails(); // Method to print car details
