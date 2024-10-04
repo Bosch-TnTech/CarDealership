@@ -6,18 +6,18 @@ using namespace std;
 Storage::Storage() {
     // Initialize variables here
     ifstream myfile;
-    int numCars = 0;
+    int carCount = 0;
     string cmake;
     string cmodel;
     int cyear = 0;
-    float cprice = 0
+    float cprice = 0;
 
 }
 
 Storage::~Storage() {
     // Clean up memory here
 
-    for(int i = 0; i < numCars; i++)
+    for(int i = 0; i < carCount; i++)
     {
         delete cars[i];
     }
@@ -35,29 +35,29 @@ bool Storage::loadCarsFromFile(const string& filename) {
     {
         while(getline(myfile, line, ' '))
         {
-            numCars++;
+            carCount++;
         }
 
-        numCars = numCars/4;
+        carCount = carCount/4;
 
-        Cars** cars = new cars*[numCars];
+        Car** cars = new Car*[carCount];
 
         myfile.clear();
         myfile.seekg(0,myfile.beg);
 
-        for(int i=0; i < numCars, i++)
+        for(int i=0; i < carCount; i++)
         {
             getline(myfile, cmake, ' ');
-            cars[i+1]->make =  cmake;
+            cars[i]->setMake(cmake);
 
             getline(myfile, cmodel, ' ');
-            cars[i+1]->model = cmodel;
+            cars[i]->setModel(cmodel);
 
             getline(myfile, cyear, ' ');
-            cars[i+1]->year = cyear;
+            cars[i]->setYear(stoi(cyear));
 
             getline(myfile, cprice, ' ');
-            cars[i+1]->price = cprice;
+            cars[i]->setPrice(stof(cprice));
 
         }
 
@@ -77,15 +77,15 @@ bool Storage::loadCarsFromFile(const string& filename) {
 void Storage::printCarInventory() {
     // Loop through cars and print details
 
-    for(int i = 0; i < numCars; i++)
+    for(int i = 0; i < carCount; i++)
     {
         cout << endl;
         cout << "Car " << i+1 << ": ";
         cout << endl;
-        cout << "Make - " << cars[i]->make << endl;
-        cout << "Model - " << cars[i]->model << endl;
-        cout << "Year - " << cars[i]->year << endl;
-        cout << "Price - " << cars[i]->price << endl;
+        cout << "Make - " << cars[i]->getMake() << endl;
+        cout << "Model - " << cars[i]->getModel() << endl;
+        cout << "Year - " << cars[i]->getYear() << endl;
+        cout << "Price - " << cars[i]->getPrice() << endl;
     }
 
 }
@@ -95,10 +95,10 @@ void Storage::getCarInfo(int carIndex) {
     cout << endl;
     cout << "Car " << carIndex << ": ";
     cout << endl;
-    cout << "Make - " << cars[carIndex]->make << endl;
-    cout << "Model - " << cars[carIndex]->model << endl;
-    cout << "Year - " << cars[carIndex]->year << endl;
-    cout << "Price - " << cars[carIndex]->price << endl;
+    cout << "Make - " << cars[carIndex]->getMake() << endl;
+    cout << "Model - " << cars[carIndex]->getModel() << endl;
+    cout << "Year - " << cars[carIndex]->getYear() << endl;
+    cout << "Price - " << cars[carIndex]->getPrice() << endl;
 
 }
 
@@ -124,9 +124,9 @@ void Storage::printFilteredCars(Car** filteredCars) {
         cout << endl;
         cout << "Car " << i + 1 << ": ";
         cout << endl;
-        cout << "Make - " << filteredCars[i]->make << endl; 
-        cout << "Model - " << filteredCars[i]->model << endl;
-        cout << "Year - " << filteredCars[i]->year << endl;
-        cout << "Price - " << filteredCars[i]->price << endl; 
+        cout << "Make - " << filteredCars[i]->getMake() << endl; 
+        cout << "Model - " << filteredCars[i]->getModel() << endl;
+        cout << "Year - " << filteredCars[i]->getYear() << endl;
+        cout << "Price - " << filteredCars[i]->getPrice() << endl; 
     }
 }

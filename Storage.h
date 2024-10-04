@@ -8,11 +8,11 @@ private:
     Car** cars;      // Pointer to an array of Car objects
     int carCount;    // Number of cars
     ifstream myfile;
-    int numCars;
+    string line;
     string cmake;
     string cmodel;
-    int cyear;
-    float cprice;
+    string cyear;
+    string cprice;
 
 public:
     Storage();       // Constructor
