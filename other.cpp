@@ -1,76 +1,62 @@
 #include "Other.h"
 #include <iostream>
 
-void Other::sortCarsByPrice(Car** cars, int carCount) 
-{
-    Car key;
-	int j;
+using namespace std;
 
-	
-	for (int i = 1; i < carCount; i++)
+void Other::sortCarsByPrice(Car **cars, int carCount)
+{
+
+	sort(cars, cars + carCount, [](Car *a, Car *b){
+			return a->getPrice() < b->getPrice(); 
+	});
+}
+
+Car **Other::filterCarsByMake(Car **cars, int carCount, const std::string &make)
+{
+	// Implement filtering logic here
+
+	Car **filteredCars = new Car *[carCount];
+
+	int filteredCount = 0;
+
+	for (int i = 0; i < carCount; ++i)
 	{
-		key = *cars[i];
-		j = i - 1;
-		while (j >= 0 && cars[j]->getPrice() > key.getPrice())
+		if (cars[i]->getMake() == make)
 		{
-			cars[j + 1] = cars[j];
-			j = j - 1;
-		}
-		*cars[j + 1] = key;
-	}
-}
-
-Car** Other::filterCarsByMake(Car** cars, int carCount, const std::string& make) {
-    // Implement filtering logic here
-    return nullptr; // Change to actual filtered array
-}
-
-Car** Other::filterCarsByYear(Car** cars, int carCount, int minYear, int maxYear) 
-{
-    // Implement filtering logic here
-
-    int pivotPoint;
-
-    pivotPoint = partSelect(cars, minYear, maxYear);
-    filterCarsByYear(cars, minYear, pivotPoint);
-    filterCarsByYear(cars, pivotPoint + 1, maxYear);
-
-    return nullptr; // Change to actual filtered array
-}
-
-int partSelect(Car **cars, int left, int right)
-{
-	int middle;
-	bool finished = false;
-	Car * temp;
-	string pivot;
-
-	// pivot starting in middle
-	middle = left + (right - left) / 2;
-	pivot = cars[middle]->getYear();
-	int x = left;
-	int y = right;
-	while (!finished)
-	{
-		while (cars[x]->getYear() < pivot)
-			++x;
-		while (pivot < cars[y]->getYear())
-			--y;
-		if (x >= y)
-			finished = true;
-		else
-		{
-			temp = cars[x];
-			cars[x] = cars[y];
-			cars[y] = temp;
-			++x;
-			--y;
+			filteredCars[filteredCount++] = cars[i];
 		}
 	}
-	return y;
 
+	return filteredCars; // Change to actual filtered array
 }
 
-void Other::getDealershipInfo() {
-    // Print dealership details
+Car **Other::filterCarsByYear(Car **cars, int carCount, int minYear, int maxYear)
+{
+	// Implement filtering logic here
+
+	Car **filteredCars = new Car *[carCount];
+
+	int filteredCount = 0;
+
+	for (int i = 0; i < carCount; i++)
+	{
+		if (cars[i]->getYear() >= minYear && cars[i]->getYear() <= maxYear)
+		{
+			filteredCars[filteredCount++] = cars[i];
+		}
+	}
+
+	return filteredCars; // Change to actual filtered array
+}
+
+void Other::getDealershipInfo()
+{
+	// Print dealership details
+
+	cout << "****************************************************\n";
+	cout << "*	Crazy Cars Dealership                           *\n";
+	cout << "*	Located in Cookeveille TN right of Dixie Drive  *\n";
+	cout << "*	Phone Number: 649 563 6483                      *\n";
+	cout << "****************************************************\n\n";
+
 }
