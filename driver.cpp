@@ -1,35 +1,27 @@
 #include <iostream>
 #include <string>
 #include "Storage.h"
-#include "Data.h"
 #include "Other.h"
 
 using namespace std;
-
-// Function prototypes
-
 
 void displayMenu();
 void handleUserInput(Storage& storage, Other& other);
 
 int main() {
-    // Instantiate the storage and other classes
     Storage carStorage;
     Other carUtils;
 
-    // Load cars from file (assuming Storage class has a function for this)
     if (!carStorage.loadCarsFromFile("cars.txt")) {
         cout << "Error loading car data from file." << endl;
-        return 1;  // Exit if file loading fails
+        return 1;
     }
 
-    cout << "Welcome to the Car Dealership Program!" << endl;
-
-    // Main program loop
     bool running = true;
     while (running) {
         displayMenu();
         handleUserInput(carStorage, carUtils);
+
         char continueProgram;
         cout << "Would you like to continue? (y/n): ";
         cin >> continueProgram;
@@ -42,79 +34,51 @@ int main() {
     return 0;
 }
 
-// Function to display menu options to the user
 void displayMenu() {
-    cout << "\nMenu Options:" << endl;
-    cout << "1. View all cars" << endl;
-    cout << "2. View specific car details" << endl;
+    cout << "\n********** Menu *******************\n";
+    cout << "1. View all cars (Make, Model, Year)" << endl;
+    cout << "2. View specific car details (Price)" << endl;
     cout << "3. Sort cars by price" << endl;
     cout << "4. Filter cars by make" << endl;
-    cout << "5. Filter cars by year" << endl;
-    cout << "6. Dealership information" << endl;
-    cout << "7. Exit" << endl;
-    cout << "Please choose an option (1-7): ";
+    cout << "5. View Dealership Information" << endl;  // Added dealership info
+    cout << "6. Exit" << endl;
+    cout << "*************************************\n";
+    cout << "Please choose an option: ";
 }
 
-// Function to handle user input and process menu actions
 void handleUserInput(Storage& storage, Other& other) {
     int choice;
     cin >> choice;
 
     switch (choice) {
-        case 1: {
-            // Display all cars
-            storage.printCarInventory();
+        case 1:
+            storage.printCarInventory();  // Only prints make, model, and year
             break;
-        }
         case 2: {
-            // View specific car details
             int carIndex;
-            cout << "Enter the car number you want details for: ";
+            cout << "Enter the car number for more details: ";
             cin >> carIndex;
-            storage.getCarInfo(carIndex);  // Assuming storage class handles this
+            storage.getCarInfo(carIndex - 1);  // Display full car details (with price)
             break;
         }
-        case 3: {
-            // Sort cars by price
+        case 3:
             other.sortCarsByPrice(storage.getCarArray(), storage.getCarCount());
-            cout << "Cars sorted by price:" << endl;
-            storage.printCarInventory();
+            storage.printCarInventory();  // Display sorted cars (make, model, year)
             break;
-        }
         case 4: {
-            // Filter cars by make
             string make;
-            cout << "Enter the car make: ";
+            cout << "Enter the car make to filter by: ";
             cin >> make;
-            Car** filteredCars = other.filterCarsByMake(storage.getCarArray(), storage.getCarCount(), make);
-            cout << "Cars filtered by make:" << endl;
-            storage.printFilteredCars(filteredCars);  // Assuming a function for printing filtered cars
+            other.filterCarsByMake(storage.getCarArray(), storage.getCarCount(), make);
             break;
         }
-        case 5: {
-            // Filter cars by year
-            int minYear, maxYear;
-            cout << "Enter the minimum year: ";
-            cin >> minYear;
-            cout << "Enter the maximum year: ";
-            cin >> maxYear;
-            Car** filteredCars = other.filterCarsByYear(storage.getCarArray(), storage.getCarCount(), minYear, maxYear);
-            cout << "Cars filtered by year range:" << endl;
-            storage.printFilteredCars(filteredCars);  // Assuming a function for printing filtered cars
+        case 5:
+            other.displayDealershipInfo();  // Show dealership information
             break;
-        }
-        case 6: {
-            // Display dealership information
-            other.getDealershipInfo();
-            break;
-        }
-        case 7: {
-            // Exit the program
+        case 6:
             cout << "Exiting the program..." << endl;
             exit(0);
-        }
-        default: {
-            cout << "Invalid option, please choose again." << endl;
-        }
+        default:
+            cout << "Invalid option, please try again." << endl;
     }
 }

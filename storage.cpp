@@ -1,128 +1,74 @@
-#include "Storage.h"  
-#include "Data.h"   
-#include <fstream>    // For file operations
-#include <sstream>    // For parsing lines from the file
+#include "Storage.h"
+#include <fstream>
 #include <iostream>
+#include <iomanip>  // Include for setw, setprecision
+
 using namespace std;
 
-Storage::Storage() {
-    // Initialize variables here
-    this->carcount = 0;
-    this->cars = nullptr;
-}
+Storage::Storage() : cars(nullptr), carCount(0) {}
 
 Storage::~Storage() {
-    // Clean up memory here
-    if (cars != nullptr)
-    {
-        for (int = 0; i < carCount; i++)
-        {
-            delete cars[i]:
+    if (cars != nullptr) {
+        for (int i = 0; i < carCount; i++) {
+            delete cars[i];
         }
         delete[] cars;
     }
+}
 
-
-bool Storage::loadCarsFromFile(const string& filename) 
-{
+bool Storage::loadCarsFromFile(const string& filename) {
     ifstream file(filename);
-    if(!file)
-    {
-        cerr << "Unable to open file: " << filename << endl;
+    if (!file) {
+        cerr << "Error: Could not open file." << endl;
         return false;
     }
-    string line;
-    carCount = 0;
-    while (getline(file,line))
-    {
-        carCount++; //Counts each line
-    }
-    file.clear();
-    file.seekg(0);
 
-    this ->cars = new Car*[carCount];
+    file >> carCount;
+    cars = new Data*[carCount];
 
-    int index = 0;
-    while (getline(file, line))
-    {
-        stringstream ss(line);
-        string make, model;
-        int year;
-        double price;
-        getline (ss, make, ',');
-        getline(ss, model. ','):
-        ss >> year;
-        ss.ignore();
-        ss >> price;
+    string make, model;
+    int year;
+    double price;
 
-        car[index++] = new Car(make, model, year, price);
+    for (int i = 0; i < carCount; ++i) {
+        file >> make >> model >> year >> price;
+        cars[i] = new Data(make, model, year, price);
     }
 
     file.close();
     return true;
 }
 
-void Storage::printCarInventory() 
-{
-    // Loop through cars and print details
-    if (carCount == 0)
-    {
-        cout << "No cars available in the Inventory!" <<endl;
-    }
-
-    for(int i = 0; i < carCount; i++)
-    {
-        printCarDetails(cars[i], i);
-    }
-
-}
-
-void Storage::getCarInfo(int carIndex) {
-    // Display specific car information
-    if (carIndex < 1 || carIndex > carCount)
-    {
-        cout << "Invalid car number!" << endl;
+void Storage::printCarInventory() const {
+    if (carCount == 0) {
+        cout << "No cars available in the Inventory!" << endl;
         return;
     }
 
-    printCarDetails(cars[carIndex - 1], carIndex -1);
+    cout << "\n****** Car Inventory *****\n";
+    for (int i = 0; i < carCount; i++) {
+        cout << i + 1 << ". " << cars[i]->getMake() << " " << cars[i]->getModel() << " (" << cars[i]->getYear() << ")" << endl;
+    }
+    cout << "**************************\n";
 }
 
-Car** Storage::getCarArray()
-{
-   return cars; // just returning a pointer to the car array
-}
-
-int Storage::getCarCount() 
-{
-    return carCount; // Return the number of cars
-}
-
-void Storage::printFilteredCars(Car** filteredCars, int filteredCount) 
-{
-    // Print the filtered list of cars
-    if (filteredCount == 0)
-    {
-        cout << "No Cars match the filter criteria" << endl;
+void Storage::getCarInfo(int index) const {
+    if (index < 0 || index >= carCount) {
+        cout << "Invalid car index!" << endl;
         return;
     }
 
+    Data* car = cars[index];
 
-    for(int i = 0; i < filteredCount; i++)
-    {
-        printCarDetails(filteredCars[i], i);
-    }
+    // Print the details of the selected car in a cleaner format with '*' borders
+    cout << "\n********** Car Details **********" << endl;
+    cout << left << setw(10) << "Make:" << car->getMake() << endl;
+    cout << left << setw(10) << "Model:" << car->getModel() << endl;
+    cout << left << setw(10) << "Year:" << car->getYear() << endl;
+    cout << left << setw(10) << "Price:" << "$" << fixed << setprecision(2) << car->getPrice() << endl;
+    cout << "\n*********************************" << endl;
 }
 
+int Storage::getCarCount() const { return carCount; }
 
-void Storage:: printCarDetails(Car* car, int index)
-{
-        cout << endl;
-        cout << "Car " << i+1 << ": ";
-        cout << endl;
-        cout << "Make - " << car->getMake() << endl;
-        cout << "Model - " << car->getModel() << endl;
-        cout << "Year - " << car->getYear() << endl;
-        cout << "Price - $" << car->getPrice() << endl;
-    
-}
+Data** Storage::getCarArray() const { return cars; }

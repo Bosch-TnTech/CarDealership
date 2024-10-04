@@ -1,26 +1,19 @@
-# Compiler
-CXX = g++
+all: car_dealership
 
-# Compiler flags
-CXXFLAGS = -std=c++11 -Wall
+car_dealership: Driver.o Storage.o Data.o Other.o
+	g++ Driver.o Storage.o Data.o Other.o -o car_dealership
 
-# Target executable
-TARGET = dealership
+Driver.o: Driver.cpp Storage.h Data.h Other.h
+	g++ -c Driver.cpp
 
-# Source files
-SRCS = Driver.cpp Storage.cpp Data.cpp Other.cpp
+Storage.o: Storage.cpp Storage.h Data.h
+	g++ -c Storage.cpp
 
-# Object files
-OBJS = $(SRCS:.cpp=.o)
+Data.o: Data.cpp Data.h
+	g++ -c Data.cpp
 
-# Build target
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+Other.o: Other.cpp Other.h
+	g++ -c Other.cpp
 
-# Rule to compile .cpp to .o
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-# Clean up object files and executable
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f *.o car_dealership

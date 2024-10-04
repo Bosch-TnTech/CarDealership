@@ -1,56 +1,31 @@
 #include "Other.h"
+#include <algorithm>
 #include <iostream>
 
 using namespace std;
 
-void Other::sortCarsByPrice(Car **cars, int carCount)
-{
-
-	sort(cars, cars + carCount, [](Car *a, Car *b){
-			return a->getPrice() < b->getPrice(); 
-	});
+void Other::sortCarsByPrice(Data** cars, int carCount) {
+    sort(cars, cars + carCount, [](Data* a, Data* b) {
+        return a->getPrice() < b->getPrice();
+    });
+    cout << "Cars sorted by price!" << endl;
 }
 
-Car **Other::filterCarsByMake(Car **cars, int carCount, const std::string &make)
-{
-	// Implement filtering logic here
-
-	Car **filteredCars = new Car *[carCount];
-
-	int filteredCount = 0;
-
-	for (int i = 0; i < carCount; ++i)
-	{
-		if (cars[i]->getMake() == make)
-		{
-			filteredCars[filteredCount++] = cars[i];
-		}
-	}
-
-	return filteredCars; // Change to actual filtered array
+void Other::filterCarsByMake(Data** cars, int carCount, const string& make) {
+    bool found = false;
+    for (int i = 0; i < carCount; i++) {
+        if (cars[i]->getMake() == make) {
+            cars[i]->displayInfo();  // Full info of matching cars
+            found = true;
+        }
+    }
+    if (!found) {
+        cout << "No cars found for make: " << make << endl;
+    }
 }
 
-Car **Other::filterCarsByYear(Car **cars, int carCount, int minYear, int maxYear)
-{
-	// Implement filtering logic here
 
-	Car **filteredCars = new Car *[carCount];
-
-	int filteredCount = 0;
-
-	for (int i = 0; i < carCount; i++)
-	{
-		if (cars[i]->getYear() >= minYear && cars[i]->getYear() <= maxYear)
-		{
-			filteredCars[filteredCount++] = cars[i];
-		}
-	}
-
-	return filteredCars; // Change to actual filtered array
-}
-
-void Other::getDealershipInfo()
-{
+void Other::displayDealershipInfo() const {
 	// Print dealership details
 
 	cout << "****************************************************\n";

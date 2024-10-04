@@ -1,49 +1,13 @@
-1
-y
-2
-1
-y
-2
-2
-y
-2
-3
-y
-2
-4
-y
-2
-5
-y
-2
-6
-y
-2
-7
-y
-2
-8
-y
-2
-9
-y
-2
-10
-y
-2
-11
-y
-2
-12
-y
-3
-y
-4
-Ford
-y
-5
-2001
-2024
-y
-6
-n
+Test case 1: Viewing all cars
+- Expected output: List of all cars with their details.
+
+Test case 2: Viewing specific car details
+- Input: 1 (Selects the first car)
+- Expected output: Make, Model, Year, Price of the first car.
+
+Test case 3: Sorting cars by price
+- Expected output: Cars should be sorted in ascending order by price.
+
+Test case 4: Filtering cars by make
+- Input: Toyota
+- Expected output: Only Toyota cars displayed.
