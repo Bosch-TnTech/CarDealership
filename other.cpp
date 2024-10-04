@@ -1,60 +1,62 @@
 #include "Other.h"
 #include <iostream>
 
-void Other::sortCarsByPrice(Car** cars, int carCount) 
-{
-    Car key;
-	int j;
+using namespace std;
 
-	
-	for (int i = 1; i < carCount; i++)
+void Other::sortCarsByPrice(Car **cars, int carCount)
+{
+
+	sort(cars, cars + carCount, [](Car *a, Car *b){
+			return a->getPrice() < b->getPrice(); 
+	});
+}
+
+Car **Other::filterCarsByMake(Car **cars, int carCount, const std::string &make)
+{
+	// Implement filtering logic here
+
+	Car **filteredCars = new Car *[carCount];
+
+	int filteredCount = 0;
+
+	for (int i = 0; i < carCount; ++i)
 	{
-		key = *cars[i];
-		j = i - 1;
-		while (j >= 0 && cars[j]->getPrice() > key.getPrice())
+		if (cars[i]->getMake() == make)
 		{
-			cars[j + 1] = cars[j];
-			j = j - 1;
+			filteredCars[filteredCount++] = cars[i];
 		}
-		*cars[j + 1] = key;
 	}
+
+	return filteredCars; // Change to actual filtered array
 }
 
-Car** Other::filterCarsByMake(Car** cars, int carCount, const std::string& make) {
-    // Implement filtering logic here
-    return nullptr; // Change to actual filtered array
-}
-
-Car** Other::filterCarsByYear(Car** cars, int carCount, int minYear, int maxYear) 
+Car **Other::filterCarsByYear(Car **cars, int carCount, int minYear, int maxYear)
 {
-    // Implement filtering logic here
+	// Implement filtering logic here
 
-	Car** filteredCars = new Car *[carCount];
+	Car **filteredCars = new Car *[carCount];
 
 	int filteredCount = 0;
 
 	for (int i = 0; i < carCount; i++)
 	{
-		if(cars[i]->getYear() >= minYear && cars[i]->getYear() <= maxYear)
+		if (cars[i]->getYear() >= minYear && cars[i]->getYear() <= maxYear)
 		{
 			filteredCars[filteredCount++] = cars[i];
 		}
 	}
-    
-    return filteredCars; // Change to actual filtered array
+
+	return filteredCars; // Change to actual filtered array
 }
 
-int partSelect(Car **cars, int carCount, int minYear, int maxYear)
+void Other::getDealershipInfo()
 {
-	Car** filteredCars = new Car*[carCount];
+	// Print dealership details
 
-	int filteredCount = 0;
+	cout << "****************************************************";
+	cout << "*	Crazy Cars Dealership\n\n                       *";
+	cout << "*	Located in Cookeveille TN right of Dixie Drive  *\n\n";
+	cout << "*	Phone Number: 649 563 6483                      *";
+	cout << "****************************************************";
 
-
-	
-
-}
-
-void Other::getDealershipInfo() {
-    // Print dealership details
 }
