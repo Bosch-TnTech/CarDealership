@@ -1,0 +1,6 @@
+5
+Toyota Camry 2019 24500.50
+Honda Accord 2020 26500.00
+Ford Mustang 2018 35500.75
+Chevrolet Malibu 2021 27500.25
+BMW 3Series 2022 41000.99
