@@ -1,128 +1,128 @@
-#include "Storage.h"
+#include "Storage.h"  
+#include "Data.h"   
+#include <fstream>    // For file operations
+#include <sstream>    // For parsing lines from the file
 #include <iostream>
-#include <fstream>
 using namespace std;
 
 Storage::Storage() {
     // Initialize variables here
-    carCount = 0;
-    cars = NULL;
-
+    this->carcount = 0;
+    this->cars = nullptr;
 }
 
 Storage::~Storage() {
     // Clean up memory here
-
-    for(int i = 0; i < carCount; i++)
+    if (cars != nullptr)
     {
-        delete cars[i];
+        for (int = 0; i < carCount; i++)
+        {
+            delete cars[i]:
+        }
+        delete[] cars;
     }
 
-    delete [] cars;
-}
 
-bool Storage::loadCarsFromFile(const string& filename) {
-    // Implementation for loading cars from a file
-
-
-    myfile.open(filename);
-
-    if(myfile.is_open() )
+bool Storage::loadCarsFromFile(const string& filename) 
+{
+    ifstream file(filename);
+    if(!file)
     {
-        while(getline(myfile, line, ' '))
-        {
-            carCount++;
-        }
-
-        carCount = carCount/4;
-
-        Car** cars = new Car*[carCount];
-
-        myfile.clear();
-        myfile.seekg(0,myfile.beg);
-
-        for(int i=0; i < carCount; i++)
-        {
-            getline(myfile, cmake, ',');
-            cars[i]->setMake(cmake);
-
-            getline(myfile, cmodel, ',');
-            cars[i]->setModel(cmodel);
-
-            getline(myfile, cyear, ',');
-            cars[i]->setYear(stoi(cyear));
-
-            getline(myfile, cprice, ',');
-            cars[i]->setPrice(stof(cprice));
-
-        }
-
-        myfile.close();
-
-        return true;
-    }
-    else
-    {
-        cout << endl << "Problem loading the file." << endl;
+        cerr << "Unable to open file: " << filename << endl;
         return false;
     }
+    string line;
+    carCount = 0;
+    while (getline(file,line))
+    {
+        carCount++; //Counts each line
+    }
+    file.clear();
+    file.seekg(0);
 
-   
+    this ->cars = new Car*[carCount];
+
+    int index = 0;
+    while (getline(file, line))
+    {
+        stringstream ss(line);
+        string make, model;
+        int year;
+        double price;
+        getline (ss, make, ',');
+        getline(ss, model. ','):
+        ss >> year;
+        ss.ignore();
+        ss >> price;
+
+        car[index++] = new Car(make, model, year, price);
+    }
+
+    file.close();
+    return true;
 }
 
-void Storage::printCarInventory() {
+void Storage::printCarInventory() 
+{
     // Loop through cars and print details
+    if (carCount == 0)
+    {
+        cout << "No cars available in the Inventory!" <<endl;
+    }
 
     for(int i = 0; i < carCount; i++)
     {
-        cout << endl;
-        cout << "Car " << i+1 << ": ";
-        cout << endl;
-        cout << "Make - " << cars[i]->getMake() << endl;
-        cout << "Model - " << cars[i]->getModel() << endl;
-        cout << "Year - " << cars[i]->getYear() << endl;
-        cout << "Price - " << cars[i]->getPrice() << endl;
+        printCarDetails(cars[i], i);
     }
 
 }
 
 void Storage::getCarInfo(int carIndex) {
     // Display specific car information
-    cout << endl;
-    cout << "Car " << carIndex << ": ";
-    cout << endl;
-    cout << "Make - " << cars[carIndex]->getMake() << endl;
-    cout << "Model - " << cars[carIndex]->getModel() << endl;
-    cout << "Year - " << cars[carIndex]->getYear() << endl;
-    cout << "Price - " << cars[carIndex]->getPrice() << endl;
+    if (carIndex < 1 || carIndex > carCount)
+    {
+        cout << "Invalid car number!" << endl;
+        return;
+    }
 
+    printCarDetails(cars[carIndex - 1], carIndex -1);
 }
 
-Car** Storage::getCarArray() {
-
-    return cars; // Return the array of cars
+Car** Storage::getCarArray()
+{
+   return cars; // just returning a pointer to the car array
 }
 
-int Storage::getCarCount() {
-
-    carCount = sizeof(cars)/sizeof(cars[0]);
-
+int Storage::getCarCount() 
+{
     return carCount; // Return the number of cars
 }
 
-void Storage::printFilteredCars(Car** filteredCars) {
+void Storage::printFilteredCars(Car** filteredCars, int filteredCount) 
+{
     // Print the filtered list of cars
-    
-    int size = sizeof(filteredCars)/sizeof(filteredCars[0]);
-
-    for(int i = 0; i < size; i++)
+    if (filteredCount == 0)
     {
-        cout << endl;
-        cout << "Car " << i + 1 << ": ";
-        cout << endl;
-        cout << "Make - " << filteredCars[i]->getMake() << endl; 
-        cout << "Model - " << filteredCars[i]->getModel() << endl;
-        cout << "Year - " << filteredCars[i]->getYear() << endl;
-        cout << "Price - " << filteredCars[i]->getPrice() << endl; 
+        cout << "No Cars match the filter criteria" << endl;
+        return;
     }
+
+
+    for(int i = 0; i < filteredCount; i++)
+    {
+        printCarDetails(filteredCars[i], i);
+    }
+}
+
+
+void Storage:: printCarDetails(Car* car, int index)
+{
+        cout << endl;
+        cout << "Car " << i+1 << ": ";
+        cout << endl;
+        cout << "Make - " << car->getMake() << endl;
+        cout << "Model - " << car->getModel() << endl;
+        cout << "Year - " << car->getYear() << endl;
+        cout << "Price - $" << car->getPrice() << endl;
+    
 }
