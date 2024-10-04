@@ -1,0 +1,1 @@
+Ford,F150,2015,$10200,Chevy,Blazer,2017,$14500,Ford,Taurus,2009,$3200,Chevy,Corvette,2017,$52300,Honda,Civic,2003,$2300,Jeep,Wrangler,2012,$7500,Chevy,Silverado,2009,$5600,Chevy,Tahoe,2013,$6400,Tesla,Cybertruck,2024,$82000,Lamborghini,Aventador,2022,$215000,Aston Martin,DBS,2023,$330000,Ferrari,Portofino,2023,$270000
