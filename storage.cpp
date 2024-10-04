@@ -5,10 +5,7 @@ using namespace std;
 
 Storage::Storage() {
     // Initialize variables here
-    ifstream myfile;
     int carCount = 0;
-    string cmake;
-    string cmodel;
     int cyear = 0;
     float cprice = 0;
 
@@ -47,16 +44,16 @@ bool Storage::loadCarsFromFile(const string& filename) {
 
         for(int i=0; i < carCount; i++)
         {
-            getline(myfile, cmake, ' ');
+            getline(myfile, cmake, ',');
             cars[i]->setMake(cmake);
 
-            getline(myfile, cmodel, ' ');
+            getline(myfile, cmodel, ',');
             cars[i]->setModel(cmodel);
 
-            getline(myfile, cyear, ' ');
+            getline(myfile, cyear, ',');
             cars[i]->setYear(stoi(cyear));
 
-            getline(myfile, cprice, ' ');
+            getline(myfile, cprice, ',');
             cars[i]->setPrice(stof(cprice));
 
         }
