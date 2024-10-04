@@ -53,10 +53,10 @@ void Other::getDealershipInfo()
 {
 	// Print dealership details
 
-	cout << "****************************************************";
-	cout << "*	Crazy Cars Dealership\n\n                       *";
-	cout << "*	Located in Cookeveille TN right of Dixie Drive  *\n\n";
-	cout << "*	Phone Number: 649 563 6483                      *";
-	cout << "****************************************************";
+	cout << "****************************************************\n";
+	cout << "*	Crazy Cars Dealership                           *\n";
+	cout << "*	Located in Cookeveille TN right of Dixie Drive  *\n";
+	cout << "*	Phone Number: 649 563 6483                      *\n";
+	cout << "****************************************************\n\n";
 
 }
