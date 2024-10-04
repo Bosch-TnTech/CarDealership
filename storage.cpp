@@ -5,9 +5,8 @@ using namespace std;
 
 Storage::Storage() {
     // Initialize variables here
-    int carCount = 0;
-    int cyear = 0;
-    float cprice = 0;
+    carCount = 0;
+    cars = NULL;
 
 }
 
