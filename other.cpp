@@ -29,18 +29,28 @@ Car** Other::filterCarsByYear(Car** cars, int carCount, int minYear, int maxYear
 {
     // Implement filtering logic here
 
-    int pivotPoint;
+	Car** filteredCars = new Car *[carCount];
 
-    pivotPoint = partSelect(cars, minYear, maxYear);
-    filterCarsByYear(cars, minYear, pivotPoint);
-    filterCarsByYear(cars, pivotPoint + 1, maxYear);
+	int filteredCount = 0;
 
-    return nullptr; // Change to actual filtered array
+	for (int i = 0; i < carCount; i++)
+	{
+		if(cars[i]->getYear() >= minYear && cars[i]->getYear() <= maxYear)
+		{
+			filteredCars[filteredCount++] = cars[i];
+		}
+	}
+    
+    return filteredCars; // Change to actual filtered array
 }
 
-int partSelect(Car **cars, int left, int right)
+int partSelect(Car **cars, int carCount, int minYear, int maxYear)
 {
-	
+	Car** filteredCars = new Car*[carCount];
+
+	int filteredCount = 0;
+
+
 	
 
 }
