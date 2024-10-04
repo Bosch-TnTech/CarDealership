@@ -2,6 +2,8 @@
 
 Car::Car() {
     // Initialize car attributes
+    int year = 0;
+    double price = 0;
 }
 
 Car::~Car() {
@@ -18,4 +20,6 @@ void Car::setMake(const std::string& make) {
 
 void Car::printDetails() {
     // Print car details (make, model, year, price)
+    cout << "\nMake: " << getMake() << "\nModel: " << getModel() << endl;
+    cout << "Year: " << getYear() << "\nPrice: " << getPrice() << endl;
 }
