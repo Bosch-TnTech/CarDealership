@@ -40,34 +40,8 @@ Car** Other::filterCarsByYear(Car** cars, int carCount, int minYear, int maxYear
 
 int partSelect(Car **cars, int left, int right)
 {
-	int middle;
-	bool finished = false;
-	Car * temp;
-	string pivot;
-
-	// pivot starting in middle
-	middle = left + (right - left) / 2;
-	pivot = cars[middle]->getYear();
-	int x = left;
-	int y = right;
-	while (!finished)
-	{
-		while (cars[x]->getYear() < pivot)
-			++x;
-		while (pivot < cars[y]->getYear())
-			--y;
-		if (x >= y)
-			finished = true;
-		else
-		{
-			temp = cars[x];
-			cars[x] = cars[y];
-			cars[y] = temp;
-			++x;
-			--y;
-		}
-	}
-	return y;
+	
+	
 
 }
 
