@@ -27,6 +27,12 @@ public:
     double getPrice();
 
     void setMake(const string& make);
+
+    void setModel(const string& model);
+
+    void setPrice(const double& price);
+
+    void setYear(const int& year);
     
     void printDetails(); // Method to print car details
 };
