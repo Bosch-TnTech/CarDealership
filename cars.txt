@@ -1,6 +1,18 @@
-5
-Toyota Camry 2019 24500.50
-Honda Accord 2020 26500.00
+17
 Ford Mustang 2018 35500.75
+Porsche 911 2021 120000.00
+Honda Accord 2020 26500.00
+Kia Optima 2020 25000.00
+Jeep Wrangler 2022 45000.89
+Toyota Camry 2019 24500.50
+Ford F150 2022 52000.00
 Chevrolet Malibu 2021 27500.25
+Porsche Cayenne 2022 98000.99
 BMW 3Series 2022 41000.99
+Honda Civic 2019 21500.45
+Kia Sorento 2021 34000.80
+Nissan Altima 2020 23500.65
+Jeep Cherokee 2020 32000.25
+Mercedes CClass 2020 45000.30
+Audi A4 2019 37000.50
+Tesla Model3 2021 49999.99

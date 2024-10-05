@@ -1,3 +1,8 @@
+
+#Refrence was from GEEKS4GEEKS https://www.geeksforgeeks.org/makefile-in-c-and-its-applications/
+#Lost Brain Cells making this. longest part of the program. 2 youtube videos and multiple forums later I believe that there is a matrix now...
+
+
 all: car_dealership
 
 car_dealership: Driver.o Storage.o Data.o Other.o
